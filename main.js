@@ -1,20 +1,25 @@
 $(document).ready(function() {
 
-  var words = [];
+  var words = ["ScriptEd",  "Hackathon", "Landfill", "substancex", "DrGloo"];
   // Fill the words array above with the words you want to play with in your game.
 
   var selectedWord; // This will be set to the word in your array selected by your chooseRandomWord method.
   var guessFields = []; // This will be set to the clue that the user sees. Something like "_ _ _ _ _".
 
   function startGame() {
-    // Hide the "#pregame-message"
+   $("#pregame-message").css("display", "none");
+    // Hide the "#pregame-message" 
+    $("#letter-input").css("display", "block")
     // Show the "#letter-input"
+    chooseRandomWord();
     // Call the "chooseRandomWord" method so a new word is selected for the game.
   }
-
+  
   function chooseRandomWord() {
     // Generate a random number between 0 and words.length and save it as a variable called "randomIndex."
-    selectedWord = words[randomIndex];
+    var randomIndex = Math.floor(Math.random() * words.length);
+    selectedWord = words[randomIndex]
+    initializeGuessFields();
     // Call the "initializeGuessFields" method so we can set up the guess fields for the game.
   }
 
@@ -54,10 +59,17 @@ $(document).ready(function() {
 
   function wordArray() {
     // Return the "selectedWord" as an array, so that each letter is its own indexed element.
+    return selectedWord.split(" ");
+    debugger
   }
-
   // Make the "#start" button call the "startGame" method on click.
+  $("#start").click(function() {
+    startGame();
+  })
   // Make the "#guess" button call the "guessLetter" method on click.
+  $("#guess").click(function() {
+    guessLetter();
+  })
 })
 
 
